@@ -1,0 +1,42 @@
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Tauri App</title>
+
+        <link rel="stylesheet" href="Styles/index.css" />
+
+        <script type="module" src="Scripts/index.js" defer></script>
+    </head>
+
+    <body>
+        <nav>
+            <button id="Main">Main</button>
+        </nav>
+        <main>
+            <h1 style="text-align: center;">QR Code Generator</h1>
+        
+            <div class="center">
+                <input id="input-link" type="url" placeholder="URL" />
+            </div>
+
+            <div class="center">
+               <button class="button1" id="Generate">Generate</button>
+               <button class="button1" id="Export">Export</button>
+            </div>
+            
+            <div class="center">
+                <p id="OUT"></p>    
+            </div>
+
+            <div class="center">
+                <img id="Generated">
+            </div>
+
+            <div class="sticky-bottom" id="popup">
+                <img src="ok.svg">
+                <p id="ptext">Exported</p>
+            </div>
+        </main>
+    </body>
+</html>

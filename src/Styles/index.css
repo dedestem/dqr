@@ -1,0 +1,111 @@
+body {
+    padding: 0px;
+    margin: 0px;
+    background-color: rgb(35, 35, 35);
+    font-family: sans-serif;
+}
+
+p {
+    font-family: sans-serif;
+    color: rgb(255, 255, 255);
+}
+
+h1 {
+    font-family: sans-serif;
+    color: rgb(255, 255, 255);
+}
+
+.center {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+nav {
+    width: calc(100% - 40px);
+    height: 60px;
+    padding-left: 40px;
+    display: flex;
+    align-items: center;
+    gap: 25px;
+    background-color: black;
+}
+
+nav > button {
+    height: 30px;
+    width: fit-content;
+    background: none;
+    border: none;
+    outline: none;
+    text-align: center;
+    font-family: sans-serif;
+    font-weight: bold;
+    color: white;
+}
+
+nav > button:hover {
+    border-bottom: 2px solid blue;
+    opacity: 0.8;
+}
+
+
+
+#input-link {
+    height: 120px;
+    width: 200px;
+
+    background: none;
+    border: none;
+    outline: none;
+    
+    text-align: center;
+    font-family: sans-serif;
+    color: rgb(255, 255, 255);
+}
+
+.button1 {
+	border-radius:28px;
+	border:1px solid #000000;
+	display:inline-block;
+	cursor:pointer;
+	font-family:Arial;
+
+	font-weight:bold;
+	padding: 8px 20px;
+	text-decoration:none;
+}
+.button1:active {
+	position:relative;
+	top:1px;
+}
+
+#Generate {
+    color:#000000;
+	background-color:#55ff00;
+}
+#Generate:hover {
+    color:#ffffff;
+	background-color:#3e8e00;
+}
+
+#Export {
+    color:#ffffff;
+	background-color:#0059ff;
+}
+#Export:hover {
+    color:#ffffff;
+	background-color:#214178;
+}
+
+.sticky-bottom {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: #000000;
+    padding: 10px; 
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 5px;
+}

@@ -1,0 +1,24 @@
+[package]
+name = "dqr"
+version = "0.0.0"
+description = "A Tauri App"
+authors = ["you"]
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[build-dependencies]
+tauri-build = { version = "1", features = [] }
+
+[dependencies]
+tauri = { version = "1", features = [ "protocol-asset", "shell-open"] }
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+qrcode = "0.14.1"
+image = "0.25.2"
+base64 = "0.22.1"
+directories = "5.0.1"
+
+[features]
+# This feature is used for production builds or when a dev server is not specified, DO NOT REMOVE!!
+custom-protocol = ["tauri/custom-protocol"]
