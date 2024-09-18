@@ -26,6 +26,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
     });
 
     document.getElementById('Export').addEventListener('click', async () => {
+        document.getElementById('Generated').src = "";
         const downloadpath = await invoke("get_downloads_path");
         console.log(downloadpath);
 
