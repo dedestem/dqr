@@ -47,7 +47,12 @@ document.addEventListener("DOMContentLoaded", (event) => {
                 popup.style.visibility = "hidden";
             }, 5000);
         } catch (error) {
-            console.error('Error generating QR code:', error);
+            popup.style.visibility = "visible";
+            ptext.innerText = 'Error generating QR code:', error;
+
+            setTimeout(() => {
+                popup.style.visibility = "hidden";
+            }, 5000);
         }
     });
 });
