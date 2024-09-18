@@ -10,6 +10,21 @@ use tauri::{Config, State};
 use directories::UserDirs;
 use std::{fs::File, io::Write};
 
+fn sanitize_filename(filename: &str) -> String {
+    // Maak een whitelist van toegestane tekens
+    let allowed_chars: &str = if cfg!(target_os = "windows") {
+        "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789._-"
+    } else {
+        "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789._-"
+    };
+
+    // Filter het bestand door alleen toegestane tekens te behouden
+    filename
+        .chars()
+        .filter(|c| allowed_chars.contains(*c))
+        .collect()
+}
+
 #[tauri::command]
 fn get_downloads_path() -> Option<String> {
     UserDirs::new()
@@ -44,10 +59,14 @@ fn generate_qr_code_export(data: String) -> Result<(), String> {
     // Verkrijg het pad naar de download directory
     let downloads_path = get_downloads_path().ok_or("Unable to get downloads path")?;
     
+    // Clean Data
+    let data: String = sanitize_filename(&data);
+
     // Maak de volledige bestandsnaam en pad aan
     let file_name = format!("qr_{}.svg", data);
     let file_path = format!("{}/{}", downloads_path, file_name);
     
+    println!("{}", file_path);
     // Sla het SVG-bestand op
     let mut file = File::create(file_path).map_err(|e| e.to_string())?;
     file.write_all(svg_code.as_bytes()).map_err(|e| e.to_string())?;
