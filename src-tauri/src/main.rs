@@ -1,14 +1,15 @@
-#![cfg_attr(
-    all(not(debug_assertions), target_os = "windows"),
-    windows_subsystem = "windows"
-)]
+//#![cfg_attr(
+//    all(not(debug_assertions), target_os = "windows"),
+//    windows_subsystem = "windows"
+//)]
 
 use qrcode::QrCode;
 use qrcode::render::svg;
-use base64::encode;
 use tauri::{Config, State};
 use directories::UserDirs;
 use std::{fs::File, io::Write};
+use base64::engine::general_purpose;
+use base64::Engine;
 
 fn sanitize_filename(filename: &str) -> String {
     // Maak een whitelist van toegestane tekens
@@ -32,6 +33,7 @@ fn get_downloads_path() -> Option<String> {
         .map(|path_buf| path_buf.to_string_lossy().into_owned())
 }
 
+
 #[tauri::command]
 fn generate_qr_code(data: String, _config: State<'_, Config>) -> Result<String, String> {
     // Genereer de QR-code
@@ -41,12 +43,13 @@ fn generate_qr_code(data: String, _config: State<'_, Config>) -> Result<String, 
     let svg_code: String = code.render::<svg::Color>().min_dimensions(200, 200).build();
 
     // Encodeer de SVG-code naar een base64-string
-    let base64_svg = encode(svg_code);
+    let base64_svg = general_purpose::STANDARD.encode(svg_code);
 
     // Maak een data URL
     let data_url = format!("data:image/svg+xml;base64,{}", base64_svg);
     Ok(data_url)
 }
+
 
 #[tauri::command]
 fn generate_qr_code_export(data: String) -> Result<(), String> {

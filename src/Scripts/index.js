@@ -10,7 +10,12 @@ document.addEventListener("DOMContentLoaded", (event) => {
     document.getElementById('Generate').addEventListener('click', async () => {
         const data = document.getElementById('input-link').value;
         if (!data) return;
+            popup.style.visibility = "visible";
+            ptext.innerText = 'Please put in data:', error;
 
+            setTimeout(() => {
+                popup.style.visibility = "hidden";
+            }, 2000);
         try {
             // Roep de Rust functie aan om de QR-code te genereren
             const imagePath = await invoke('generate_qr_code', { data });
@@ -21,7 +26,12 @@ document.addEventListener("DOMContentLoaded", (event) => {
             // Toon de QR-code in de <img> tag
             document.getElementById('Generated').src = imagePath;
         } catch (error) {
-            console.error('Error generating QR code:', error);
+            popup.style.visibility = "visible";
+            ptext.innerText = 'Error generating QR code:', error;
+
+            setTimeout(() => {
+                popup.style.visibility = "hidden";
+            }, 5000);
         }
     });
 
@@ -49,7 +59,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
             }, 5000);
         } catch (error) {
             popup.style.visibility = "visible";
-            ptext.innerText = 'Error generating QR code:', error;
+            ptext.innerText = 'Error exporting QR code:', error;
 
             setTimeout(() => {
                 popup.style.visibility = "hidden";
